@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Img } from "react-image";
-import { dbService, storageService } from "../fbase";
+import { dbService } from "../fbase";
 import { Helmet } from "react-helmet";
-import { AppString } from "../defin";
+import { AppString, baseUrl } from "../defin";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,19 +41,33 @@ const useStyles = makeStyles((theme) => ({
 const BiblePick = ({ name }) => {
   const classes = useStyles();
   const [isPick, setIsPick] = useState(false);
-  //const [imgUrl, setImageUrl] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const pathReference = await storageService
-  //       .ref("sample.png")
-  //       .getDownloadURL();
-  //     setImageUrl(pathReference);
-  //   }
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    dbService
+      .collection("picks")
+      .orderBy("createdAt", "asc")
+      .onSnapshot((snapshot) => {
+        const nowPickers = snapshot.docs.map((doc, index) => ({
+          id: index,
+          ...doc.data(),
+        }));
+        console.log(nowPickers);
+        const findpicker = nowPickers.find((picker) => picker.name === name);
+        if (findpicker !== undefined) {
+          setIsPick(true);
+          console.log(findpicker);
+        }
+        setLoading(false);
+      });
+  }, [name]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    const newPicker = {
+      name: name,
+      createdAt: Date.now(),
+    };
+    await dbService.collection("picks").add(newPicker);
     setIsPick(true);
   };
 
@@ -76,7 +90,7 @@ const BiblePick = ({ name }) => {
       document.body.appendChild(link);
       link.click();
     };
-    xhr.open("GET", "https://bjh63742.github.io/pick-bible/img/sample.png");
+    xhr.open("GET", `${baseUrl}/img/sample.png`);
     xhr.send();
   };
 
@@ -84,16 +98,17 @@ const BiblePick = ({ name }) => {
     window.location.replace("/");
   };
 
+  if (loading) {
+    return <div>Loading</div>;
+  }
+
   if (isPick) {
     return (
       <Container component="main" maxWidth="xs">
         <Helmet>
           <title>{AppString.title}</title>
         </Helmet>
-        <Img
-          src="https://bjh63742.github.io/pick-bible/img/sample.png"
-          className={classes.img}
-        />
+        <Img src={`${baseUrl}/img/sample.png`} className={classes.img} />
         <Button
           fullWidth
           variant="contained"
