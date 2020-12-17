@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/bibleCardPick/static/css/main.b4107258.chunk.css",
+    "main.js": "/bibleCardPick/static/js/main.08283b5e.chunk.js",
+    "main.js.map": "/bibleCardPick/static/js/main.08283b5e.chunk.js.map",
+    "runtime-main.js": "/bibleCardPick/static/js/runtime-main.3dcf21ba.js",
+    "runtime-main.js.map": "/bibleCardPick/static/js/runtime-main.3dcf21ba.js.map",
+    "static/js/2.02a3790d.chunk.js": "/bibleCardPick/static/js/2.02a3790d.chunk.js",
+    "static/js/2.02a3790d.chunk.js.map": "/bibleCardPick/static/js/2.02a3790d.chunk.js.map",
+    "index.html": "/bibleCardPick/index.html",
+    "static/css/main.b4107258.chunk.css.map": "/bibleCardPick/static/css/main.b4107258.chunk.css.map",
+    "static/js/2.02a3790d.chunk.js.LICENSE.txt": "/bibleCardPick/static/js/2.02a3790d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3dcf21ba.js",
+    "static/js/2.02a3790d.chunk.js",
+    "static/css/main.b4107258.chunk.css",
+    "static/js/main.08283b5e.chunk.js"
+  ]
+}
