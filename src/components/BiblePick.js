@@ -58,12 +58,10 @@ const BiblePick = ({ name }) => {
           id: index,
           ...doc.data(),
         }));
-        console.log(nowPickers);
         const findpicker = nowPickers.find((picker) => picker.name === name);
         if (findpicker !== undefined) {
           setBibleNumber(findpicker.id + 1); // 0 부터 시작하므로
           setIsPick(true);
-          console.log(findpicker);
         }
         setLoading(false);
       });
@@ -102,7 +100,9 @@ const BiblePick = ({ name }) => {
       document.body.appendChild(link);
       link.click();
     };
-    xhr.open("GET", `${baseUrl}/img/sample.png`);
+    const cardNubmer = bibleNumber % 151;
+    const fileName = "202100" + numberPad(cardNubmer, 3) + ".png";
+    xhr.open("GET", `${baseUrl}/img/${fileName}`);
     xhr.send();
   };
 
