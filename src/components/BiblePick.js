@@ -61,8 +61,8 @@ const BiblePick = ({ name }) => {
         console.log(nowPickers);
         const findpicker = nowPickers.find((picker) => picker.name === name);
         if (findpicker !== undefined) {
-          setIsPick(true);
           setBibleNumber(findpicker.id + 1); // 0 부터 시작하므로
+          setIsPick(true);
           console.log(findpicker);
         }
         setLoading(false);
