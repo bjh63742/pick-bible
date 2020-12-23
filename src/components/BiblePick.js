@@ -38,12 +38,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function numberPad(n, width) {
+  n = n + "";
+  return n.length >= width ? n : new Array(width - n.length + 1).join("0") + n;
+}
+
 const BiblePick = ({ name }) => {
   const classes = useStyles();
-  const [isPick, setIsPick] = useState(false);
+  const [isPick, setIsPick] = useState(false); // 뽑았는지 안뽑았는지
+  const [bibleNumber, setBibleNumber] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const updateBibleNumber = () => {
     dbService
       .collection("picks")
       .orderBy("createdAt", "asc")
@@ -56,19 +62,25 @@ const BiblePick = ({ name }) => {
         const findpicker = nowPickers.find((picker) => picker.name === name);
         if (findpicker !== undefined) {
           setIsPick(true);
+          setBibleNumber(findpicker.id + 1); // 0 부터 시작하므로
           console.log(findpicker);
         }
         setLoading(false);
       });
-  }, [name]);
+  };
 
+  useEffect(() => {
+    updateBibleNumber();
+  }, []);
+
+  // 말씀 뽑기
   const handleClick = async () => {
     const newPicker = {
       name: name,
       createdAt: Date.now(),
     };
     await dbService.collection("picks").add(newPicker);
-    setIsPick(true);
+    updateBibleNumber();
   };
 
   const download = () => {
@@ -95,7 +107,7 @@ const BiblePick = ({ name }) => {
   };
 
   const reflesh = () => {
-    window.location.replace("/");
+    window.location.replace("https://bjh63742.github.io/pick-bible");
   };
 
   if (loading) {
@@ -103,12 +115,15 @@ const BiblePick = ({ name }) => {
   }
 
   if (isPick) {
+    const cardNubmer = bibleNumber % 151;
+    const fileName = "202100" + numberPad(cardNubmer, 3) + ".png";
+    console.log(fileName);
     return (
       <Container component="main" maxWidth="xs">
         <Helmet>
           <title>{AppString.title}</title>
         </Helmet>
-        <Img src={`${baseUrl}/img/sample.png`} className={classes.img} />
+        <Img src={`${baseUrl}/img/${fileName}`} className={classes.img} />
         <Button
           fullWidth
           variant="contained"
