@@ -1,13 +1,13 @@
 import React from "react";
 import "../assets/scss/styles.scss";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Home from "../routes/Home";
+import Router from "./Router";
 
 function App() {
   return (
     <>
       <CssBaseline />
-      <Home />
+      <Router />
     </>
   );
 }

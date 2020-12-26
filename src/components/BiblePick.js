@@ -7,6 +7,7 @@ import { Img } from "react-image";
 import { dbService } from "../fbase";
 import { Helmet } from "react-helmet";
 import { AppString, baseUrl } from "../defin";
+import Loading from "./Loading";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,6 +30,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#00A8E0",
   },
   title: {
+    color: "#00A8E0",
+    fontFamily: "NotoSerifKR",
+    fontWeight: "500",
+  },
+  nameTitle: {
+    marginTop: "5px",
     color: "#00A8E0",
     fontFamily: "NotoSerifKR",
     fontWeight: "500",
@@ -111,7 +118,7 @@ const BiblePick = ({ name }) => {
   };
 
   if (loading) {
-    return <div>Loading</div>;
+    return <Loading />;
   }
 
   if (isPick) {
@@ -154,7 +161,9 @@ const BiblePick = ({ name }) => {
           <Typography component="h1" variant="h4" className={classes.title}>
             {AppString.title}
           </Typography>
-          <Typography className={classes.title}>{name}</Typography>
+          <Typography component="h1" variant="h5" className={classes.nameTitle}>
+            {name}
+          </Typography>
           <div>
             <Button
               type="submit"
