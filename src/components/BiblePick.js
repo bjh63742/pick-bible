@@ -40,8 +40,12 @@ const useStyles = makeStyles((theme) => ({
   nameTitle: {
     marginTop: "5px",
     color: "rgba(0, 0, 0, 0.75)",
-    fontFamily: "NotoSerifKR",
     fontWeight: "500",
+  },
+  subTitle: {
+    fontSize: "20px",
+    marginTop: "15px",
+    textAlign: "center",
   },
 }));
 
@@ -76,6 +80,7 @@ const BiblePick = ({ name }) => {
 
   useEffect(() => {
     updateBibleNumber();
+    // eslint-disable-next-line
   }, []);
 
   // 말씀 뽑기
@@ -86,31 +91,6 @@ const BiblePick = ({ name }) => {
     };
     await dbService.collection("picks").add(newPicker);
     updateBibleNumber();
-  };
-
-  const download = () => {
-    console.log("down");
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = "blob";
-    xhr.onload = function (event) {
-      var blob = xhr.response;
-      console.log(blob);
-      const blobUrl = URL.createObjectURL(blob);
-
-      // Create a link element
-      const link = document.createElement("a");
-
-      // Set link's href to point to the Blob URL
-      link.href = blobUrl;
-      link.download = `2021년 ${name} 의 말씀.png`;
-      // Append link to the body
-      document.body.appendChild(link);
-      link.click();
-    };
-    const cardNubmer = bibleNumber % 151;
-    const fileName = "202100" + numberPad(cardNubmer, 3) + ".png";
-    xhr.open("GET", `${baseUrl}/img/${fileName}`);
-    xhr.send();
   };
 
   const reflesh = () => {
@@ -131,15 +111,9 @@ const BiblePick = ({ name }) => {
           <title>{AppString.title}</title>
         </Helmet>
         <Img src={`${baseUrl}/img/${fileName}`} className={classes.img} />
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick={download}
-        >
-          저장
-        </Button>
+        <Typography className={classes.subTitle}>
+          이미지를 길게 눌러 저장해 주세요
+        </Typography>
         <Button
           fullWidth
           variant="contained"
