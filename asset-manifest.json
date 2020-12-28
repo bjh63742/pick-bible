@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/pick-bible/static/css/main.b4107258.chunk.css",
-    "main.js": "/pick-bible/static/js/main.085073da.chunk.js",
-    "main.js.map": "/pick-bible/static/js/main.085073da.chunk.js.map",
+    "main.css": "/pick-bible/static/css/main.c766a437.chunk.css",
+    "main.js": "/pick-bible/static/js/main.134aedb1.chunk.js",
+    "main.js.map": "/pick-bible/static/js/main.134aedb1.chunk.js.map",
     "runtime-main.js": "/pick-bible/static/js/runtime-main.e51a45c7.js",
     "runtime-main.js.map": "/pick-bible/static/js/runtime-main.e51a45c7.js.map",
     "static/js/2.d747b766.chunk.js": "/pick-bible/static/js/2.d747b766.chunk.js",
     "static/js/2.d747b766.chunk.js.map": "/pick-bible/static/js/2.d747b766.chunk.js.map",
     "index.html": "/pick-bible/index.html",
-    "static/css/main.b4107258.chunk.css.map": "/pick-bible/static/css/main.b4107258.chunk.css.map",
+    "static/css/main.c766a437.chunk.css.map": "/pick-bible/static/css/main.c766a437.chunk.css.map",
     "static/js/2.d747b766.chunk.js.LICENSE.txt": "/pick-bible/static/js/2.d747b766.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e51a45c7.js",
     "static/js/2.d747b766.chunk.js",
-    "static/css/main.b4107258.chunk.css",
-    "static/js/main.085073da.chunk.js"
+    "static/css/main.c766a437.chunk.css",
+    "static/js/main.134aedb1.chunk.js"
   ]
 }
