@@ -22,15 +22,19 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
+    fontFamily: "NanumSquare",
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
     backgroundColor: "#00A8E0",
+    fontFamily: "NanumSquare",
   },
   title: {
     color: "#00A8E0",
-    fontFamily: "NotoSerifKR",
-    fontWeight: "500",
+    fontFamily: "NanumSquare",
+  },
+  font: {
+    fontFamily: "NanumSquare",
   },
 }));
 
@@ -68,6 +72,7 @@ export default function Login({ handleName }) {
             id="name"
             label="이름"
             name="name"
+            className={classes.font}
             autoComplete="email"
             autoFocus
             inputRef={inputName}

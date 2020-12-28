@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "white",
+    fontFamily: "NanumSquare",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -24,14 +25,16 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
+    fontFamily: "NanumSquare",
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
     backgroundColor: "#00A8E0",
+    fontFamily: "NanumSquare",
   },
   title: {
     color: "#00A8E0",
-    fontFamily: "NotoSerifKR",
+    fontFamily: "NanumSquare",
     fontWeight: "500",
   },
   img: {
@@ -41,11 +44,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "5px",
     color: "rgba(0, 0, 0, 0.75)",
     fontWeight: "500",
+    fontFamily: "NanumSquare",
   },
   subTitle: {
     fontSize: "20px",
     marginTop: "15px",
     textAlign: "center",
+    fontFamily: "NanumSquare",
   },
 }));
 
