@@ -3,13 +3,35 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Img } from "react-image";
+import Image from "material-ui-image";
 import { dbService } from "../fbase";
 import { Helmet } from "react-helmet";
 import { AppString, baseUrl } from "../defin";
 import Loading from "./Loading";
+import backGround from "../assets/img/back.png";
 
 const useStyles = makeStyles((theme) => ({
+  containerPadding: {
+    marginTop: "30%",
+    width: "100%",
+  },
+  inner: {
+    paddingTop: `calc(100%/2479*2200)`,
+    backgroundImage: `url("${backGround}")`,
+    backgroundSize: "cover",
+    position: "relative",
+  },
+  content: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    color: "white",
+    width: "100%",
+  },
+  titleContainer: {
+    textAlign: "center",
+    marginTop: "60px",
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -28,17 +50,34 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "NanumSquare",
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: "#00A8E0",
+    margin: "auto",
+    textAlign: "center",
+    backgroundColor: "white",
+    opacity: "0.5",
+    width: "30%",
+    color: "black",
+    fontFamily: "NanumSquare",
+  },
+  submitFirst: {
+    marginTop: "20px",
+    marginBottom: "20px",
+    textAlign: "center",
+    backgroundColor: "black",
+    opacity: "0.5",
+    width: "30%",
+    color: "white",
     fontFamily: "NanumSquare",
   },
   title: {
-    color: "#00A8E0",
+    color: "white",
+    fontSize: "25px",
     fontFamily: "NanumSquare",
-    fontWeight: "500",
+    fontWeight: 800,
+    lineHeight: "29px",
   },
   img: {
     width: "100%",
+    height: "auto",
   },
   nameTitle: {
     marginTop: "5px",
@@ -51,6 +90,26 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "15px",
     textAlign: "center",
     fontFamily: "NanumSquare",
+  },
+  btnContainer: {
+    marginTop: "10px",
+    display: "flex",
+    justifyContent: "center",
+  },
+  btnTestContainer: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  copyRight: {
+    position: "absolute",
+    bottom: 0,
+    color: "white",
+    marginBottom: "10px",
+    margin: "auto",
+    textAlign: "center",
+    fontSize: "13px",
+    fontFamily: "NanumSquare",
+    fontWeight: "700",
   },
 }));
 
@@ -109,54 +168,66 @@ const BiblePick = ({ name }) => {
   if (isPick) {
     const cardNubmer = bibleNumber % 151;
     const fileName = "202100" + numberPad(cardNubmer, 3) + ".png";
-    console.log(fileName);
     return (
       <Container component="main" maxWidth="xs">
         <Helmet>
           <title>{AppString.title}</title>
         </Helmet>
-        <Img src={`${baseUrl}/img/${fileName}`} className={classes.img} />
+        <Image
+          src={`${baseUrl}/img/${fileName}`}
+          className={classes.img}
+          cover
+          aspectRatio={729 / 1579}
+        />
         <Typography className={classes.subTitle}>
           이미지를 길게 눌러 저장해 주세요
         </Typography>
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick={reflesh}
-        >
-          처음으로
-        </Button>
+        <div className={classes.btnTestContainer}>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submitFirst}
+            onClick={reflesh}
+          >
+            처음으로
+          </Button>
+        </div>
       </Container>
     );
   } else {
     return (
-      <Container component="main" maxWidth="xs">
-        <Helmet>
-          <title>{AppString.title}</title>
-        </Helmet>
-        <div className={classes.paper}>
-          <Typography component="h1" variant="h4" className={classes.title}>
-            {AppString.title}
-          </Typography>
-          <Typography component="h1" variant="h5" className={classes.nameTitle}>
-            {name}
-          </Typography>
-          <div>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={handleClick}
-            >
-              말씀 받기
-            </Button>
+      <div className={classes.containerPadding}>
+        <div className={classes.inner}>
+          <div className={classes.content}>
+            <Helmet>
+              <title>{AppString.title}</title>
+            </Helmet>
+            <div className={classes.titleContainer}>
+              <Typography className={classes.title}>2021년</Typography>
+              <Typography className={classes.title}>내게 주신 말씀</Typography>
+              <Typography className={classes.title}>{name}</Typography>
+            </div>
+            <div className={classes.btnContainer}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={handleClick}
+              >
+                말씀 받기
+              </Button>
+            </div>
+          </div>
+          <div className={classes.btnContainer}>
+            <Typography className={classes.copyRight}>
+              물댄동산 수림교회
+            </Typography>
           </div>
         </div>
-      </Container>
+      </div>
     );
   }
 };
