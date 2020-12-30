@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
     width: "30%",
     color: "black",
     fontFamily: "NanumSquare",
+    fontWeight: "900",
   },
   submitFirst: {
     marginTop: "20px",
@@ -71,6 +72,15 @@ const useStyles = makeStyles((theme) => ({
   title: {
     color: "white",
     fontSize: "25px",
+    fontFamily: "NanumSquare",
+    fontWeight: 800,
+    lineHeight: "29px",
+  },
+  name: {
+    marginTop: "45px",
+    marginBottom: "50px",
+    color: "black",
+    fontSize: "30px",
     fontFamily: "NanumSquare",
     fontWeight: 800,
     lineHeight: "29px",
@@ -206,7 +216,7 @@ const BiblePick = ({ name }) => {
             <div className={classes.titleContainer}>
               <Typography className={classes.title}>2021년</Typography>
               <Typography className={classes.title}>내게 주신 말씀</Typography>
-              <Typography className={classes.title}>{name}</Typography>
+              <Typography className={classes.name}>{name}</Typography>
             </div>
             <div className={classes.btnContainer}>
               <Button

@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     backgroundColor: "white",
     opacity: "0.5",
-    width: "40%",
+    width: "45%",
     color: "black",
     fontFamily: "NanumSquare",
   },
@@ -90,6 +90,7 @@ const helperTextStyles = makeStyles((theme) => ({
     margin: 4,
     marginTop: "11px",
     fontSize: "11px",
+    fontWeight: 600,
     lineHeight: "12px",
     fontFamily: "NanumSquare",
     "&$error": {
@@ -158,7 +159,7 @@ export default function Login({ handleName }) {
               }}
               className={classes.font}
               inputRef={inputName}
-              helperText={`이름은 두글자 이상으로 한사람당 한번만 입력해 주시고 나오는 말씀은 바로 저장해 주세요`}
+              helperText={`이름은 두 글자 이상으로 입력해 주시고 나오는 말씀은 바로 저장해 주세요.`}
             />
             <div className={classes.btnContainer}>
               <Button
