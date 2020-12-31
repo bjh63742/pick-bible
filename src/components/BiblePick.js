@@ -133,6 +133,8 @@ const BiblePick = ({ name }) => {
   const [isPick, setIsPick] = useState(false); // 뽑았는지 안뽑았는지
   const [bibleNumber, setBibleNumber] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setAdmin] = useState(false);
+  const [pickers, setPickers] = useState([]);
 
   const updateBibleNumber = () => {
     dbService
@@ -143,10 +145,15 @@ const BiblePick = ({ name }) => {
           id: index,
           ...doc.data(),
         }));
-        const findpicker = nowPickers.find((picker) => picker.name === name);
-        if (findpicker !== undefined) {
-          setBibleNumber(findpicker.id + 1); // 0 부터 시작하므로
-          setIsPick(true);
+        if (name === "#1122#") {
+          setPickers(nowPickers);
+          setAdmin(true);
+        } else {
+          const findpicker = nowPickers.find((picker) => picker.name === name);
+          if (findpicker !== undefined) {
+            setBibleNumber(findpicker.id + 1); // 0 부터 시작하므로
+            setIsPick(true);
+          }
         }
         setLoading(false);
       });
@@ -175,7 +182,35 @@ const BiblePick = ({ name }) => {
     return <Loading />;
   }
 
-  if (isPick) {
+  if (isAdmin) {
+    return (
+      <Container component="main" maxWidth="xs">
+        <Helmet>
+          <title>{AppString.title}</title>
+        </Helmet>
+        {pickers.map((picker) => {
+          const cardNubmer = (picker.id + 1) % 151;
+          const fileName = "202100" + numberPad(cardNubmer, 3) + ".png";
+          return (
+            <>
+              <Image
+                src={`${baseUrl}/img/${fileName}`}
+                className={classes.img}
+                cover
+                aspectRatio={729 / 1579}
+              />
+              <Typography className={classes.subTitle}>
+                {picker.name}
+              </Typography>
+            </>
+          );
+        })}
+        <Typography className={classes.subTitle}>
+          이미지를 길게 눌러 저장해 주세요
+        </Typography>
+      </Container>
+    );
+  } else if (isPick) {
     const cardNubmer = bibleNumber % 151;
     const fileName = "202100" + numberPad(cardNubmer, 3) + ".png";
     return (
