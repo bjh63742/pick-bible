@@ -136,27 +136,27 @@ const BiblePick = ({ name }) => {
   const [isAdmin, setAdmin] = useState(false);
   const [pickers, setPickers] = useState([]);
 
-  const updateBibleNumber = () => {
-    dbService
+  const updateBibleNumber = async () => {
+    const querySnapshot = await dbService
       .collection("picks")
       .orderBy("createdAt", "asc")
-      .onSnapshot((snapshot) => {
-        const nowPickers = snapshot.docs.map((doc, index) => ({
-          id: index,
-          ...doc.data(),
-        }));
-        if (name === "#1122#") {
-          setPickers(nowPickers);
-          setAdmin(true);
-        } else {
-          const findpicker = nowPickers.find((picker) => picker.name === name);
-          if (findpicker !== undefined) {
-            setBibleNumber(findpicker.id + 1); // 0 부터 시작하므로
-            setIsPick(true);
-          }
-        }
-        setLoading(false);
-      });
+      .get();
+    console.log(querySnapshot);
+    const nowPickers = querySnapshot.docs.map((doc, index) => ({
+      id: index,
+      ...doc.data(),
+    }));
+    if (name === "#1122#") {
+      setPickers(nowPickers);
+      setAdmin(true);
+    } else {
+      const findpicker = nowPickers.find((picker) => picker.name === name);
+      if (findpicker !== undefined) {
+        setBibleNumber(findpicker.id + 1); // 0 부터 시작하므로
+        setIsPick(true);
+      }
+    }
+    setLoading(false);
   };
 
   useEffect(() => {
